@@ -1,4 +1,4 @@
-package com.xsn-demo;
+package com.xsn;
 
 import static org.junit.Assert.assertTrue;
 

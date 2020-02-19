@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!-- 生成mysql带有分页的sql的插件  这个可以自己写，-->
+<!--        <plugin type="generator.MysqlPaginationPlugin" />-->
+<!--        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />-->
+<!--        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />-->
+<!--        &lt;!&ndash; 自定义的注释规则，继承 DefaultCommentGenerator 重写 一些方法 &ndash;&gt;-->
+<!--        <commentGenerator type="generator.NewbatisGenerator">-->
+<!--            &lt;!&ndash; 是否去除自动生成日期的注释 true：是 ： false:否 &ndash;&gt;-->
+<!--            <property name="suppressDate" value="true"/>-->
+<!--            &lt;!&ndash; 是否去除所有自动生成的注释 true：是 ： false:否 &ndash;&gt;-->
+<!--            <property name="suppressAllComments" value="true"/>-->
+<!--        </commentGenerator>-->
+<!--        数据库连接 密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/miaosha1"
+                        userId="root"
+                        password="">
+        </jdbcConnection>
+        <!--生成DataObject类存放位置-->
+        <javaModelGenerator targetPackage="com.xsn.dataobject" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xsn.dao"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <table tableName="user_info" domainObjectName="UserDO">
+        </table>
+        <table tableName="user_password" domainObjectName="UserPasswordDO">
+        </table>
+    </context>
+</generatorConfiguration>
