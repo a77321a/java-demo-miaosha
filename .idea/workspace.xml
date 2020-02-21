@@ -2,33 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53a69452-0215-40cf-a529-035be1f7f465" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/BaseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/viewobject/UserVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/UserDOMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/UserPasswordDOMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/UserDO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/UserDOExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/UserPasswordDO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/UserPasswordDOExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/error/BusinessException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/error/CommonError.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/error/EmBusinessError.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/response/CommonReturnType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/UserModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapping/UserDOMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapping/UserPasswordDOMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-generator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/xsn/AppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/xsn/AppTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +131,7 @@
       <workItem from="1582104526337" duration="2119000" />
       <workItem from="1582107525077" duration="1725000" />
       <workItem from="1582109844443" duration="3987000" />
-      <workItem from="1582115654500" duration="19385000" />
+      <workItem from="1582115654500" duration="19762000" />
     </task>
     <servers />
   </component>
