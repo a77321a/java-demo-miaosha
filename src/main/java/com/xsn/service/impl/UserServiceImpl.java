@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
             throw  new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         UserDO userDO = convertFromModel(userModel);
-        // insertSelective 判空
+        // insertSelective 判空 插入字段
         userDOMapper.insertSelective(userDO);
         userModel.setId(userDO.getId());
         UserPasswordDO userPasswordDO = convertPasswordFromModel(userModel);
