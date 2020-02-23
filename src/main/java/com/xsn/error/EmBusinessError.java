@@ -5,7 +5,8 @@ public enum EmBusinessError implements CommonError{
     PARAMETER_VALIDATION_ERROR(10001,"参数不合法"),
     UNKNOW_ERROR(10002,"未知错误"),
 //    2000开头为用户信息相关错误
-    USER_NOT_EXIT(20001,"用户不存在");
+    USER_NOT_EXIT(20001,"用户不存在"),
+    USER_LOGIN_ERROR(20002,"登录失败，检查账号密码");
     ;
     private  EmBusinessError(int errCode,String errMsg){
         this.errCode = errCode;

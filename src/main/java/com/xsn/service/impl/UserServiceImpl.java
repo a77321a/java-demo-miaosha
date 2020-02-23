@@ -9,8 +9,13 @@ import com.xsn.error.BusinessException;
 import com.xsn.error.EmBusinessError;
 import com.xsn.service.UserService;
 import com.xsn.service.model.UserModel;
+import com.xsn.validator.ValidResult;
+import com.xsn.validator.ValidatorImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +25,8 @@ public class UserServiceImpl implements UserService {
     private UserDOMapper userDOMapper;
     @Autowired
     private UserPasswordDOMapper userPasswordDOMapper;
+    @Autowired
+    private ValidatorImpl validatorImpl;
     @Override
     public UserModel getUserById(Integer id){
 //        使用userMapper 获取用户dataobject
@@ -42,7 +49,19 @@ public class UserServiceImpl implements UserService {
 
         return userModel;
     }
-
+    public UserModel login(String mobile,String password) throws BusinessException {
+        UserDO userDO = userDOMapper.selectByMobile(mobile);
+        if(userDO == null){
+            throw new BusinessException(EmBusinessError.USER_LOGIN_ERROR);
+        }
+        UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
+        UserModel userModel = convertFromDataObject(userDO,userPasswordDO);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if(!passwordEncoder.matches(password,userModel.getEncrptPassword())){
+            throw new BusinessException(EmBusinessError.USER_LOGIN_ERROR);
+        }
+        return userModel;
+    }
     @Override
 //    让两个数据库操作在一个事务里
     @Transactional
@@ -50,16 +69,25 @@ public class UserServiceImpl implements UserService {
         if(userModel == null){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        if(StringUtils.isEmpty(userModel.getName())||
-                userModel.getGender()==null||
-                userModel.getAge()==null||
-                StringUtils.isEmpty(userModel.getMobile())
-        ){
-            throw  new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+//        if(StringUtils.isEmpty(userModel.getName())||
+//                userModel.getGender()==null||
+//                userModel.getAge()==null||
+//                StringUtils.isEmpty(userModel.getMobile())
+//        ){
+//            throw  new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+//        }
+         ValidResult result =  validatorImpl.validate(userModel);
+        if(result.isHsErrs()){
+            throw  new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,result.getErrMsg());
+
         }
         UserDO userDO = convertFromModel(userModel);
         // insertSelective 判空 插入字段
-        userDOMapper.insertSelective(userDO);
+        try {
+            userDOMapper.insertSelective(userDO);
+        }catch (DuplicateKeyException exp){
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"手机号已经被注册");
+        }
         userModel.setId(userDO.getId());
         UserPasswordDO userPasswordDO = convertPasswordFromModel(userModel);
         userPasswordDOMapper.insertSelective(userPasswordDO);

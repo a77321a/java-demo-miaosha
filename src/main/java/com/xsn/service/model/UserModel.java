@@ -1,13 +1,27 @@
 package com.xsn.service.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class UserModel {
     private int id;
+    @NotBlank(message = "用户名不能为空")
     private String name;
+    @NotNull(message = "性别必填")
     private Byte gender;
+    @NotNull(message = "年龄必填")
+    @Min(value = 0,message = "年龄最小为0")
+    @Max(value = 200,message = "年龄最大为200")
     private Integer age;
+    @NotBlank(message = "手机号不能为空")
+
     private String mobile;
     private String registerMode;
     private String thirdPartyId;
+    @NotBlank(message = "密码不能为空")
+
     private String encrptPassword;
 
     public String getEncrptPassword() {

@@ -7,11 +7,14 @@ import com.xsn.error.EmBusinessError;
 import com.xsn.response.CommonReturnType;
 import com.xsn.service.UserService;
 import com.xsn.service.model.UserModel;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +41,24 @@ public class UserController extends BaseController {
 //    本质是一个proxy 内部threadlocal方式 处理线程对应的request
     private HttpServletRequest httpServletRequest;
     //用户注册
+    @RequestMapping(value = "/login",method = {RequestMethod.POST},consumes = {"application/x-www-form-urlencoded"})
+    @ResponseBody
+    public CommonReturnType login(@RequestParam(name="mobile")String mobile,
+                                  @RequestParam(name="password")String password
+                                  ) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
+        if(StringUtils.isEmpty(mobile)||StringUtils.isEmpty(password)){
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        UserModel userModel =  userService.login(mobile,password);
+        this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
+        this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
+        UserVO userVO = convertFromModel(userModel);
+        return CommonReturnType.create(userVO);
+    }
+
+
+
+    //用户注册
     @RequestMapping(value = "/register",method = {RequestMethod.POST},consumes = {"application/x-www-form-urlencoded"})
     @ResponseBody
     public CommonReturnType register(@RequestParam(name="mobile")String mobile,
@@ -54,23 +75,17 @@ public class UserController extends BaseController {
         }
         UserModel userModel = new UserModel();
         userModel.setAge(age);
-        userModel.setGender(new Byte(String.valueOf(gender.intValue())));
+        userModel.setGender(gender.byteValue());
         userModel.setMobile(mobile);
         userModel.setName(name);
         userModel.setRegisterMode("byMobile");
-        userModel.setEncrptPassword(this.EncodeByMd5(password));
+        userModel.setEncrptPassword(this.EncodeBySecurity(password));
         userService.register(userModel);
         return  CommonReturnType.create(null);
     }
-    public String EncodeByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
-//        md5.update(str.getBytes());
-//        // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
-//        // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
-        return (String)new BigInteger(1, md5.digest()).toString(16);
-////        return Base64.getEncoder().encode(str.getBytes("utf-8"));
-//        Encoder encoder = Base64.getEncoder();
-//        String newstr = encoder.encode(md5.digest(str.getBytes("utf-8")));
+    public String EncodeBySecurity(String str){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.encode(str);
     }
     // 用户获取otp短信接口
     @RequestMapping(value = "/getotp",method = {RequestMethod.POST},consumes = {"application/x-www-form-urlencoded"})
@@ -87,9 +102,6 @@ public class UserController extends BaseController {
         System.out.println("mobile："+mobile+"optCode："+optCode);
         return CommonReturnType.create(null);
     }
-
-
-
     @RequestMapping("/get")
     @ResponseBody
     public CommonReturnType getUser(@RequestParam(name="id")Integer id) throws BusinessException {

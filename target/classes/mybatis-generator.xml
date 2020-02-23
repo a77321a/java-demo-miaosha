@@ -26,7 +26,7 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!--生成映射文件存放位置-->
-        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--生成Dao类存放位置-->
@@ -37,6 +37,12 @@
         <table tableName="user_info" domainObjectName="UserDO">
         </table>
         <table tableName="user_password" domainObjectName="UserPasswordDO">
+        </table>
+        <table tableName="goods" enableCountByExample="false" enableDeleteByExample="false"
+              enableUpdateByExample="false" domainObjectName="GoodsDO">
+        </table>
+        <table tableName="goods_stock" enableCountByExample="false" enableDeleteByExample="false"
+               enableUpdateByExample="false" domainObjectName="GoodsStockDO">
         </table>
     </context>
 </generatorConfiguration>

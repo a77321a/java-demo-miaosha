@@ -5,6 +5,6 @@ import com.xsn.service.model.UserModel;
 
 public interface UserService {
     UserModel getUserById(Integer id);
-
     void register (UserModel userModel) throws BusinessException;
+    UserModel login(String mobile,String password) throws BusinessException;
 }
