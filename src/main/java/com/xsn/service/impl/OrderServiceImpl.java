@@ -1,5 +1,9 @@
 package com.xsn.service.impl;
 
+import com.xsn.dao.OrderInfoDOMapper;
+import com.xsn.dao.SequenceDOMapper;
+import com.xsn.dataobject.OrderInfoDO;
+import com.xsn.dataobject.SequenceDO;
 import com.xsn.error.BusinessException;
 import com.xsn.error.EmBusinessError;
 import com.xsn.service.GoodsService;
@@ -8,9 +12,15 @@ import com.xsn.service.UserService;
 import com.xsn.service.model.GoodsModel;
 import com.xsn.service.model.OrderModel;
 import com.xsn.service.model.UserModel;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -18,6 +28,10 @@ public class OrderServiceImpl implements OrderService {
     private GoodsService goodsService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private OrderInfoDOMapper orderInfoDOMapper;
+    @Autowired
+    private SequenceDOMapper sequenceDOMapper;
     @Override
     @Transactional
     public OrderModel createOrder(Integer userId, Integer goodsId, Integer amount) throws BusinessException {
@@ -34,8 +48,51 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"数量信息不正确");
         }
         //落单减库存或者支付减库存
-
+        boolean result =  goodsService.decStock(goodsId,amount);
+        if(!result){
+            throw new BusinessException(EmBusinessError.STOCK_NOT_ENOUGH);
+        }
         //订单入库
-
+        OrderModel orderModel = new OrderModel();
+        orderModel.setUserId(userId);
+        orderModel.setGoodsId(goodsId);
+        orderModel.setAmount(amount);
+        orderModel.setGoodsPrice(goodsModel.getPrice());
+        orderModel.setOrderPrice(goodsModel.getPrice().multiply(new BigDecimal(amount)));
+        orderModel.setOrderId(generateOrderId());
+        OrderInfoDO orderInfoDO = convertDOFromModel(orderModel);
+//        生成交易流水
+        orderInfoDOMapper.insertSelective(orderInfoDO);
+        return orderModel;
+    }
+//    让生成id在事务之外
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    String generateOrderId(){
+        StringBuilder stringBuilder = new StringBuilder();
+        //订单号16位 前八位时间信息 年月日 20200222
+        LocalDateTime now = LocalDateTime.now();
+        String nowDate =  now.format(DateTimeFormatter.ISO_DATE).replace("-","");
+        stringBuilder.append(nowDate);
+        // 中间6位自增
+        //获取当前sequence
+        int sequence = 0;
+        SequenceDO sequenceDO = sequenceDOMapper.getSequenceByName("order_info");
+        sequence = sequenceDO.getCurrentValue();
+        sequenceDO.setCurrentValue(sequenceDO.getCurrentValue()+sequenceDO.getStep());
+        sequenceDOMapper.updateByPrimaryKey(sequenceDO);
+        //sequence补零
+        String sequenceStr = String.format("%06d",sequence);
+        stringBuilder.append(sequenceStr);
+        // 最后两位 分库分表 (水平拆分)
+        stringBuilder.append("00");
+        return stringBuilder.toString();
+    }
+    private OrderInfoDO convertDOFromModel(OrderModel orderModel){
+        if(orderModel == null){
+            return null;
+        }
+        OrderInfoDO orderInfoDO = new OrderInfoDO();
+        BeanUtils.copyProperties(orderModel,orderInfoDO);
+        return orderInfoDO;
     }
 }

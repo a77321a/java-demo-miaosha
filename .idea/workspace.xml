@@ -2,47 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53a69452-0215-40cf-a529-035be1f7f465" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/GoodsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/viewobject/GoodsVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/GoodsDOMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/GoodsStockDOMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/OrderInfoDOMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/GoodsDO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/GoodsDOExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/GoodsStockDO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/GoodsStockDOExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/OrderInfoDO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/OrderInfoDOExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/GoodsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/GoodsServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/GoodsModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/OrderModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/validator/ValidResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/validator/ValidatorImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapping/GoodsDOMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapping/GoodsStockDOMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapping/OrderInfoDOMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/OrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/SequenceDOMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/SequenceDO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/SequenceDOExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapping/SequenceDOMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/dao/UserDOMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/UserDOMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/dao/GoodsStockDOMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/GoodsStockDOMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/error/EmBusinessError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/error/EmBusinessError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/GoodsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/GoodsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/GoodsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/OrderServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/UserModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/OrderModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/OrderModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/GoodsStockDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapping/GoodsStockDOMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/UserDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapping/UserDOMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/UserPasswordDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapping/UserPasswordDOMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/dao/UserDOMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/dao/UserDOMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/dao/GoodsStockDOMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/dao/GoodsStockDOMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/error/EmBusinessError.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/error/EmBusinessError.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/GoodsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/GoodsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/GoodsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/GoodsServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/model/UserModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/model/UserModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapping/GoodsStockDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapping/GoodsStockDOMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mapping/UserDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapping/UserDOMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/UserPasswordDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapping/UserPasswordDOMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-generator.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -105,7 +87,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.mybatis-generator">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.xsn.App" />
       <module name="miaosha1" />
@@ -171,7 +153,8 @@
       <workItem from="1582104526337" duration="2119000" />
       <workItem from="1582107525077" duration="1725000" />
       <workItem from="1582109844443" duration="3987000" />
-      <workItem from="1582115654500" duration="44856000" />
+      <workItem from="1582115654500" duration="46322000" />
+      <workItem from="1582524085906" duration="5676000" />
     </task>
     <servers />
   </component>
@@ -193,21 +176,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xsn/service/impl/UserServiceImpl.java</url>
-          <line>58</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xsn/controller/BaseController.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

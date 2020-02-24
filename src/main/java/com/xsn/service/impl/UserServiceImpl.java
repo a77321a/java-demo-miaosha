@@ -69,20 +69,12 @@ public class UserServiceImpl implements UserService {
         if(userModel == null){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-//        if(StringUtils.isEmpty(userModel.getName())||
-//                userModel.getGender()==null||
-//                userModel.getAge()==null||
-//                StringUtils.isEmpty(userModel.getMobile())
-//        ){
-//            throw  new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
-//        }
          ValidResult result =  validatorImpl.validate(userModel);
         if(result.isHsErrs()){
             throw  new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,result.getErrMsg());
 
         }
         UserDO userDO = convertFromModel(userModel);
-        // insertSelective 判空 插入字段
         try {
             userDOMapper.insertSelective(userDO);
         }catch (DuplicateKeyException exp){
@@ -99,6 +91,7 @@ public class UserServiceImpl implements UserService {
         UserPasswordDO userPasswordDO = new UserPasswordDO();
         userPasswordDO.setEncrptPassword(userModel.getEncrptPassword());
         userPasswordDO.setUserId(userModel.getId());
+
         return userPasswordDO;
     }
     private UserDO convertFromModel(UserModel userModel){

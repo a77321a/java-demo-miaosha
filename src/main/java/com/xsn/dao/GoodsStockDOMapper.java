@@ -2,6 +2,8 @@ package com.xsn.dao;
 
 import com.xsn.dataobject.GoodsStockDO;
 import com.xsn.dataobject.GoodsStockDOExample;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface GoodsStockDOMapper {
@@ -61,4 +63,6 @@ public interface GoodsStockDOMapper {
      * @mbg.generated Sun Feb 23 13:47:52 CST 2020
      */
     int updateByPrimaryKey(GoodsStockDO record);
+    int desStorck(@Param("goodsId")Integer goodsId, @Param("amount")Integer amount);
+
 }

@@ -34,15 +34,21 @@
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="user_info" domainObjectName="UserDO">
-        </table>
-        <table tableName="user_password" domainObjectName="UserPasswordDO">
-        </table>
-        <table tableName="goods" enableCountByExample="false" enableDeleteByExample="false"
-              enableUpdateByExample="false" domainObjectName="GoodsDO">
-        </table>
-        <table tableName="goods_stock" enableCountByExample="false" enableDeleteByExample="false"
-               enableUpdateByExample="false" domainObjectName="GoodsStockDO">
+<!--        <table tableName="user_info" domainObjectName="UserDO">-->
+<!--        </table>-->
+<!--        <table tableName="user_password" domainObjectName="UserPasswordDO">-->
+<!--        </table>-->
+<!--        <table tableName="goods" enableCountByExample="false" enableDeleteByExample="false"-->
+<!--              enableUpdateByExample="false" domainObjectName="GoodsDO">-->
+<!--        </table>-->
+<!--        <table tableName="goods_stock" enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableUpdateByExample="false" domainObjectName="GoodsStockDO">-->
+<!--        </table>-->
+<!--        <table tableName="order_info" enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableUpdateByExample="false" domainObjectName="OrderInfoDO">-->
+<!--        </table>-->
+        <table tableName="sequence_info" enableCountByExample="false" enableDeleteByExample="false"
+               enableUpdateByExample="false" domainObjectName="SequenceDO">
         </table>
     </context>
 </generatorConfiguration>

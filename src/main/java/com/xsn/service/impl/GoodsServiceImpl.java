@@ -26,6 +26,20 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsDOMapper goodsDOMapper;
     @Autowired
     private GoodsStockDOMapper goodsStockDOMapper;
+
+    @Override
+    @Transactional
+    public boolean decStock(Integer goodsId,Integer amount) {
+        int affectedRow = goodsStockDOMapper.desStorck(goodsId,amount);
+        if(affectedRow>0){
+            return true;
+        }
+        return  false;
+//       GoodsStockDO goodsStockDO =  goodsStockDOMapper.selectByGoodsId(goodsId);
+//       goodsStockDO.setStock(goodsStockDO.getStock() - amount );
+//       goodsStockDOMapper.updateByPrimaryKey(goodsStockDO);
+    }
+
     @Override
     @Transactional
     public GoodsModel createGoods(GoodsModel goodsModel) throws BusinessException {

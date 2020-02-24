@@ -12,4 +12,6 @@ public interface GoodsService {
     List<GoodsModel> goodsList();
     //商品详情浏览
     GoodsModel getGoodsDetail(Integer id);
+    //扣减库存
+    boolean decStock(Integer goodsId,Integer amount) throws BusinessException;
 }

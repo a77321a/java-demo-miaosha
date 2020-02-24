@@ -1,0 +1,100 @@
+<!--
+ * @Descripttion: 
+ * @Author: 
+ * @Date: 2020-02-21 13:54:24
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-02-21 14:05:27
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./static/assets/global/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/assets/global/css/components.css">
+
+
+</head>
+
+<body>
+  <div class="content">
+    <h3 class="form-title"></h3>
+    <div class="table-responsive">
+      <table class="table" id="table">
+        <tr>
+          <th>商品名</th>
+          <th>商品图片</th>
+          <th>商品描述</th>
+          <th>商品价格</th>
+          <th>商品库存</th>
+          <th>商品销量</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <script src="./static/assets/global/plugins/jquery-1.11.0.min.js" text="javascript"></script>
+  <script>
+    $(document).ready(function(){
+
+      $.ajax({
+        type:'GET',
+        contentType:"application/x-www-form-urlencoded",
+        url:'http://localhost:8888/goods/list',
+        xhrFields:{withCredentials:true},
+        success:function (res) {
+          if(res.status=="success"){
+            let htmlStr = ''
+            res.data.forEach(i => {
+              htmlStr+="<tr data-id='"+i.id+"' class='clickHandle'>"
+              htmlStr+='<td>'+i.title+'</td>'
+              htmlStr+='<td><img style="width: 100px;height: 100px;" src='+i.imgUrl+' /></td>'
+              htmlStr+='<td>'+i.description+'</td>'
+              htmlStr+='<td>'+i.price+'</td>'
+              htmlStr+='<td>'+i.stock+'</td>'
+              htmlStr+='<td>'+i.sales+'</td>'
+              htmlStr+='</tr>';
+            })
+            $('#table').append(htmlStr)
+          }else{
+          }
+        },
+        error:function (err) {
+          alert("发送失败")
+        }
+      })
+      $(".table").on("click",'tr',function () {
+        if($(this).data('id')){
+          window.location.href = './goodsDetails.html?id='+$(this).data('id')
+
+        }
+      })
+      // $("#clickHandle").on("click", function(){
+      //   $.ajax({
+      //     type:'POST',
+      //     contentType:"application/x-www-form-urlencoded",
+      //     url:'http://localhost:8888/user/getotp',
+      //     xhrFields:{withCredentials:true},
+      //     data:{
+      //       mobile:$("#mobile").val()
+      //     },
+      //     success:function (res) {
+      //       if(res.status=="success"){
+      //         window.location.href="./register.html"
+      //       }else{
+      //       }
+      //     },
+      //     error:function (err) {
+      //       alert("发送失败")
+      //     }
+      //   })
+      //   return false
+      // })
+    })
+
+  </script>
+</body>
+
+</html>

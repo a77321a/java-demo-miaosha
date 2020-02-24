@@ -29,6 +29,14 @@ public class OrderModel {
         this.userId = userId;
     }
 
+    public BigDecimal getGoodsPrice() {
+        return goodsPrice;
+    }
+
+    public void setGoodsPrice(BigDecimal goodsPrice) {
+        this.goodsPrice = goodsPrice;
+    }
+
     public Integer getGoodsId() {
         return goodsId;
     }
@@ -45,18 +53,11 @@ public class OrderModel {
         this.amount = amount;
     }
 
-    public BigDecimal getOrderAmount() {
+    public BigDecimal getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderAmount(BigDecimal orderAmount) {
-        this.orderPrice = orderAmount;
-    }
-    public BigDecimal getGoodsPrice() {
-        return goodsPrice;
-    }
-
-    public void setGoodsPrice(BigDecimal goodsPrice) {
-        this.goodsPrice = goodsPrice;
+    public void setOrderPrice(BigDecimal orderPrice) {
+        this.orderPrice = orderPrice;
     }
 }

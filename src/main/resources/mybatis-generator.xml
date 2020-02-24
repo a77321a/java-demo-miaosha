@@ -44,8 +44,11 @@
 <!--        <table tableName="goods_stock" enableCountByExample="false" enableDeleteByExample="false"-->
 <!--               enableUpdateByExample="false" domainObjectName="GoodsStockDO">-->
 <!--        </table>-->
-        <table tableName="order_info" enableCountByExample="false" enableDeleteByExample="false"
-               enableUpdateByExample="false" domainObjectName="OrderInfoDO">
+<!--        <table tableName="order_info" enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableUpdateByExample="false" domainObjectName="OrderInfoDO">-->
+<!--        </table>-->
+        <table tableName="sequence_info" enableCountByExample="false" enableDeleteByExample="false"
+               enableUpdateByExample="false" domainObjectName="SequenceDO">
         </table>
     </context>
 </generatorConfiguration>
