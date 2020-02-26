@@ -1,0 +1,124 @@
+<!--
+ * @Descripttion: 
+ * @Author: 
+ * @Date: 2020-02-21 13:54:24
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-02-21 14:05:27
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./static/assets/global/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/assets/global/css/components.css">
+</head>
+
+<body>
+  <div>
+    <h3>商品详情</h3>
+    <div class="form-group">
+      <label class="control-label">商品名</label>
+      <div>
+        <div class="control-label" id="title"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">商品描述</label>
+      <div>
+        <label class="control-label" id="description"></label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">商品价格</label>
+      <div>
+        <label class="control-label" id="price"></label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">商品图片</label>
+      <div>
+        <img id="imgUrl"></img>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">商品库存</label>
+      <div>
+        <label class="control-label" id="stock"></label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">商品销量</label>
+      <div>
+        <label class="control-label" id="sales"></label>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn blue" id="createorder" type="submit">
+        下单购买
+      </button>
+    </div>
+  </div>
+  <script src="./static/assets/global/plugins/jquery-1.11.0.min.js" text="javascript"></script>
+  <script>
+    $(document).ready(function(){
+        $.ajax({
+          type:'get',
+          url:'http://localhost:8888/goods/get',
+          data:{
+            id:window.location.search.split('?')[1].split('=')[1]
+            // title:$("#title").val(),
+            // price:$("#price").val(),
+            // description:$("#description").val(),
+            // stock:$("#stock").val(),
+            // imgUrl:"https://www.baidu.com/img/bd_logo1.png"
+          },
+          xhrFields:{withCredentials:true},
+          success:function (res) {
+            if(res.status=="success"){
+              console.log(res.data.title)
+              $("#title").text(res.data.title)
+              $("#price").text(res.data.price)
+              $("#description").text(res.data.description)
+              $("#stock").text(res.data.stock)
+              $("#imgUrl").attr('src',res.data.imgUrl)
+            }else{
+              alert(res.data.errMsg)
+            }
+          },
+          error:function (err) {
+            alert("注册失败")
+          }
+        })
+        return false
+    })
+    $("#createorder").on("click",function () {
+      console.log(1)
+      $.ajax({
+        type:'post',
+        url:'http://localhost:8888/order/createOrder',
+        contentType:"application/x-www-form-urlencoded",
+        data:{
+          goodsId:window.location.search.split('?')[1].split('=')[1],
+          amount:1,
+        },
+        xhrFields:{withCredentials:true},
+        success:function (res) {
+          if(res.status=="success"){
+            alert("下单成功")
+          }else{
+            alert(res.data.errMsg)
+          }
+        },
+        error:function (err) {
+          alert("注册失败")
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>

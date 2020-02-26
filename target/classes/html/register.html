@@ -1,0 +1,82 @@
+<!--
+ * @Descripttion: 
+ * @Author: 
+ * @Date: 2020-02-21 13:54:24
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-02-21 14:05:27
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <h3>用户注册</h3>
+    <div>
+      <div>
+        <input type="text" placeholder="手机号" name="mobile" id="mobile">
+      </div>
+      <div>
+        <input type="text" placeholder="姓名" name="name" id="name">
+      </div>
+      <div>
+        <input type="text" placeholder="年龄" name="age" id="age">
+      </div>
+      <div>
+        <input type="text" placeholder="性别" name="gender" id="gender">
+      </div>
+      <div>
+        <input type="text" placeholder="验证码" name="otpCode" id="otpCode">
+      </div>
+      <div>
+        <input type="password" placeholder="密码" name="password" id="password">
+      </div>
+      <input type="button" id="register" type="submit" value="提交">
+    </div>
+  </div>
+  <script src="./static/assets/global/plugins/jquery-1.11.0.min.js" text="javascript"></script>
+  <script>
+    $(document).ready(function(){
+      $("#register").on("click", function(){
+        if($("#mobile").val()==""){
+          alert("请输入手机号")
+          return false
+        }
+        $.ajax({
+          type:'POST',
+          contentType:"application/x-www-form-urlencoded",
+          url:'http://localhost:8888/user/register',
+          data:{
+            mobile:$("#mobile").val(),
+            name:$("#name").val(),
+            gender:$("#gender").val(),
+            age:$("#age").val(),
+            otpCode:$("#otpCode").val(),
+            password:$("#password").val()
+          },
+          xhrFields:{withCredentials:true},
+          success:function (res) {
+            if(res.status=="success"){
+              alert("注册成功")
+              window.location.href = "./login.html"
+            }else{
+            }
+          },
+          error:function (err) {
+            alert("注册失败")
+          }
+        })
+        return false
+      })
+    })
+
+  </script>
+</body>
+
+</html>

@@ -33,7 +33,6 @@ import java.util.Base64.Decoder;
 @RequestMapping("/user")
 @CrossOrigin(allowCredentials = "true",allowedHeaders = "*")
 public class UserController extends BaseController {
-    @Autowired
     private UserService userService;
     @Autowired
 //    httpServletRequest是一个单例模式
@@ -41,15 +40,20 @@ public class UserController extends BaseController {
 //    本质是一个proxy 内部threadlocal方式 处理线程对应的request
     private HttpServletRequest httpServletRequest;
     //用户注册
-    @RequestMapping(value = "/login",method = {RequestMethod.POST},consumes = {"application/x-www-form-urlencoded"})
+//    ,consumes = {"application/x-www-form-urlencoded"}
+    @RequestMapping(value = "/login",method = {RequestMethod.POST})
     @ResponseBody
-    public CommonReturnType login(@RequestParam(name="mobile")String mobile,
-                                  @RequestParam(name="password")String password
-                                  ) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
+//    public CommonReturnType login(@RequestParam(name="mobile")String mobile,
+//                                  @RequestParam(name="password")String password
+//                                  ) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
+    public CommonReturnType login(@RequestBody Map<String,String> req) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
+        String mobile = req.get("mobile");
+        String password = req.get("password");
         if(StringUtils.isEmpty(mobile)||StringUtils.isEmpty(password)){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        UserModel userModel =  userService.login(mobile,password);
+        System.out.println(userService);
+        UserModel userModel = userService.login(mobile,password);
         this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
         UserVO userVO = convertFromModel(userModel);

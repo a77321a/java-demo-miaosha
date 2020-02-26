@@ -1,0 +1,72 @@
+<!--
+ * @Descripttion: 
+ * @Author: 
+ * @Date: 2020-02-21 13:54:24
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-02-21 14:05:27
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <h3>商品创建</h3>
+    <div>
+      <div>
+        <input type="text" placeholder="商品名称" name="title" id="title">
+      </div>
+      <div>
+        <input type="number" placeholder="商品价格" name="price" id="price">
+      </div>
+      <div>
+        <input type="textarea" placeholder="商品描述" name="description" id="description">
+      </div>
+      <div>
+        <input type="number" placeholder="商品库存" name="stock" id="stock">
+      </div>
+      <input type="button" id="create" type="submit" value="提交">
+    </div>
+  </div>
+  <script src="./static/assets/global/plugins/jquery-1.11.0.min.js" text="javascript"></script>
+  <script>
+    $(document).ready(function(){
+      $("#create").on("click", function(){
+
+        $.ajax({
+          type:'POST',
+          contentType:"application/x-www-form-urlencoded",
+          url:'http://localhost:8888/goods/createGoods',
+          data:{
+            title:$("#title").val(),
+            price:$("#price").val(),
+            description:$("#description").val(),
+            stock:$("#stock").val(),
+            imgUrl:"https://www.baidu.com/img/bd_logo1.png"
+          },
+          xhrFields:{withCredentials:true},
+          success:function (res) {
+            if(res.status=="success"){
+              alert("创建成功")
+            }else{
+              alert(res.data.errMsg)
+            }
+          },
+          error:function (err) {
+            alert("注册失败")
+          }
+        })
+        return false
+      })
+    })
+
+  </script>
+</body>
+
+</html>
