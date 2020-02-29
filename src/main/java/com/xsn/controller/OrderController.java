@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller("order")
 @RequestMapping("/order")
@@ -22,10 +23,11 @@ public class OrderController  {
     @Autowired
     private HttpServletRequest httpServletRequest;
     @ResponseBody
-    @RequestMapping(value = "/createOrder",method = {RequestMethod.POST},consumes = {"application/x-www-form-urlencoded"})
-    public CommonReturnType createOrder(@RequestParam(name = "goodsId") Integer goodsId,
-                                        @RequestParam(name = "amount") Integer amount
+    @RequestMapping(value = "/createOrder",method = {RequestMethod.POST})
+    public CommonReturnType createOrder(@RequestBody Map<String,String> req
                                         ) throws BusinessException {
+        Integer goodsId = Integer.valueOf(req.get("goodsId")) ;
+        Integer amount = Integer.valueOf(req.get("amount")) ;
         Boolean isLogin = (Boolean) httpServletRequest.getSession().getAttribute("IS_LOGIN");
         if(isLogin == null || !isLogin.booleanValue()){
             throw new BusinessException(EmBusinessError.USER_NOT_EXIT,"请登录后下单");

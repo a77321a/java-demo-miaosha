@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 @Controller("goods")
 @RequestMapping("/goods")
 @CrossOrigin(allowCredentials = "true",allowedHeaders = "*")
-public class GoodsController extends BaseController {
+public class GoodsController  {
     @Autowired
     private GoodsService goodsService;
     @ResponseBody
-    @RequestMapping(value = "/createGoods",method = {RequestMethod.POST},consumes = {"application/x-www-form-urlencoded"})
+    @RequestMapping(value = "/createGoods",method = {RequestMethod.POST})
     public CommonReturnType createGoods(@RequestParam(name = "title")String title,
                                         @RequestParam(name = "price") BigDecimal price,
                                         @RequestParam(name = "description")String description,
@@ -39,7 +39,9 @@ public class GoodsController extends BaseController {
     }
     //商品详情浏览
     @ResponseBody
-    @RequestMapping(value = "/get")
+    @GetMapping("/get")
+
+//   @RequestMapping(value = "/get",method = {RequestMethod.GET})
     public CommonReturnType getGoods(@RequestParam(name = "id")Integer id){
         GoodsModel goodsModel = goodsService.getGoodsDetail(id);
         GoodsVO goodsVO = convertVOFromModel(goodsModel);

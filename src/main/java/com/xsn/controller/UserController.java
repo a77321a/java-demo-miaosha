@@ -8,31 +8,22 @@ import com.xsn.response.CommonReturnType;
 import com.xsn.service.UserService;
 import com.xsn.service.model.UserModel;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.annotations.Param;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.Base64.Encoder;
-import java.util.Base64.Decoder;
 @Controller("user")
 @RequestMapping("/user")
 @CrossOrigin(allowCredentials = "true",allowedHeaders = "*")
 public class UserController extends BaseController {
+    @Autowired
     private UserService userService;
     @Autowired
 //    httpServletRequest是一个单例模式
@@ -52,7 +43,6 @@ public class UserController extends BaseController {
         if(StringUtils.isEmpty(mobile)||StringUtils.isEmpty(password)){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        System.out.println(userService);
         UserModel userModel = userService.login(mobile,password);
         this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
