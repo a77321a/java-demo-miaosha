@@ -63,6 +63,7 @@ public class OrderServiceImpl implements OrderService {
         OrderInfoDO orderInfoDO = convertDOFromModel(orderModel);
 //        生成交易流水
         orderInfoDOMapper.insertSelective(orderInfoDO);
+        goodsService.increaseSales(goodsId,amount);
         return orderModel;
     }
 //    让生成id在事务之外
@@ -95,4 +96,5 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(orderModel,orderInfoDO);
         return orderInfoDO;
     }
+
 }

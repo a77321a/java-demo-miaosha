@@ -1,5 +1,7 @@
 package com.xsn.controller.viewobject;
 
+import org.joda.time.DateTime;
+
 import java.math.BigDecimal;
 
 public class GoodsVO {
@@ -15,6 +17,46 @@ public class GoodsVO {
     //销量
     private Integer sales;
     private String imgUrl;
+    //记录商品是否在秒杀活动在， 0：没有秒杀活动，1：代开始 2：进行中：3结束
+    private Integer promoStatus;
+    //秒杀价格
+    private BigDecimal promoPrice;
+    //秒杀id
+    private Integer promoId;
+    //开始时间
+    private String startTime;
+
+    public Integer getPromoStatus() {
+        return promoStatus;
+    }
+
+    public void setPromoStatus(Integer promoStatus) {
+        this.promoStatus = promoStatus;
+    }
+
+    public BigDecimal getPromoPrice() {
+        return promoPrice;
+    }
+
+    public void setPromoPrice(BigDecimal promoPrice) {
+        this.promoPrice = promoPrice;
+    }
+
+    public Integer getPromoId() {
+        return promoId;
+    }
+
+    public void setPromoId(Integer promoId) {
+        this.promoId = promoId;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
 
     public Integer getId() {
         return id;

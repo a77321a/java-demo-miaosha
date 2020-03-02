@@ -7,7 +7,9 @@ import com.xsn.dataobject.GoodsStockDO;
 import com.xsn.error.BusinessException;
 import com.xsn.error.EmBusinessError;
 import com.xsn.service.GoodsService;
+import com.xsn.service.PromoService;
 import com.xsn.service.model.GoodsModel;
+import com.xsn.service.model.PromoModel;
 import com.xsn.validator.ValidResult;
 import com.xsn.validator.ValidatorImpl;
 import org.springframework.beans.BeanUtils;
@@ -26,7 +28,8 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsDOMapper goodsDOMapper;
     @Autowired
     private GoodsStockDOMapper goodsStockDOMapper;
-
+    @Autowired
+    private PromoService promoService;
     @Override
     @Transactional
     public boolean decStock(Integer goodsId,Integer amount) {
@@ -35,9 +38,12 @@ public class GoodsServiceImpl implements GoodsService {
             return true;
         }
         return  false;
-//       GoodsStockDO goodsStockDO =  goodsStockDOMapper.selectByGoodsId(goodsId);
-//       goodsStockDO.setStock(goodsStockDO.getStock() - amount );
-//       goodsStockDOMapper.updateByPrimaryKey(goodsStockDO);
+    }
+
+    @Override
+    @Transactional
+    public void increaseSales(Integer goodsId, Integer amount) {
+        goodsDOMapper.increaseSales(goodsId,amount);
     }
 
     @Override
@@ -90,6 +96,11 @@ public class GoodsServiceImpl implements GoodsService {
             return null;
        GoodsStockDO goodsStockDO =  goodsStockDOMapper.selectByGoodsId(id);
        GoodsModel goodsModel = convertModelFromDO(goodsDO,goodsStockDO);
+       //获取活动商品信息
+       PromoModel promoModel = promoService.getPromoByGoodsId(goodsModel.getId());
+        if(promoModel!=null && promoModel.getStatus()!=3){
+            goodsModel.setPromoModel(promoModel);
+        }
        return goodsModel;
 //        return
     }

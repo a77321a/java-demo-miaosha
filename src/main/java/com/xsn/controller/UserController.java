@@ -15,37 +15,37 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Random;
 @Controller("user")
 @RequestMapping("/user")
-@CrossOrigin(allowCredentials = "true",allowedHeaders = "*")
+@CrossOrigin(allowCredentials = "true", allowedHeaders = "*")
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
     @Autowired
 //    httpServletRequest是一个单例模式
-//    Bean
 //    本质是一个proxy 内部threadlocal方式 处理线程对应的request
     private HttpServletRequest httpServletRequest;
     //用户注册
-//    ,consumes = {"application/x-www-form-urlencoded"}
     @RequestMapping(value = "/login",method = {RequestMethod.POST})
     @ResponseBody
-//    public CommonReturnType login(@RequestParam(name="mobile")String mobile,
-//                                  @RequestParam(name="password")String password
-//                                  ) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
     public CommonReturnType login(@RequestBody Map<String,String> req) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
         String mobile = req.get("mobile");
         String password = req.get("password");
+        System.out.println(httpServletRequest.getQueryString());
         if(StringUtils.isEmpty(mobile)||StringUtils.isEmpty(password)){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         UserModel userModel = userService.login(mobile,password);
-        this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
-        this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
+        HttpSession session = httpServletRequest.getSession();
+        session.setAttribute("IS_LOGIN",true);
+        session.setAttribute("LOGIN_USER",userModel);
+//        httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
+//        httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
         UserVO userVO = convertFromModel(userModel);
         return CommonReturnType.create(userVO);
     }

@@ -2,7 +2,6 @@ package com.xsn.service;
 
 import com.xsn.error.BusinessException;
 import com.xsn.service.model.GoodsModel;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 public interface GoodsService {
@@ -13,5 +12,7 @@ public interface GoodsService {
     //商品详情浏览
     GoodsModel getGoodsDetail(Integer id);
     //扣减库存
-    boolean decStock(Integer goodsId,Integer amount) throws BusinessException;
+    boolean decStock(Integer goodsId, Integer amount) throws BusinessException;
+    //商品销量增加
+    void increaseSales(Integer goodsId, Integer amount);
 }

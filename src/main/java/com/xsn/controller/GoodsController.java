@@ -5,6 +5,8 @@ import com.xsn.error.BusinessException;
 import com.xsn.response.CommonReturnType;
 import com.xsn.service.GoodsService;
 import com.xsn.service.model.GoodsModel;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,8 +42,6 @@ public class GoodsController  {
     //商品详情浏览
     @ResponseBody
     @GetMapping("/get")
-
-//   @RequestMapping(value = "/get",method = {RequestMethod.GET})
     public CommonReturnType getGoods(@RequestParam(name = "id")Integer id){
         GoodsModel goodsModel = goodsService.getGoodsDetail(id);
         GoodsVO goodsVO = convertVOFromModel(goodsModel);
@@ -65,6 +65,14 @@ public class GoodsController  {
         if(null == goodsModel) return null;
         GoodsVO goodsVO = new GoodsVO();
         BeanUtils.copyProperties(goodsModel,goodsVO);
+        if(goodsModel.getPromoModel()!=null){
+            goodsVO.setPromoStatus(goodsModel.getPromoModel().getStatus());
+            goodsVO.setPromoId(goodsModel.getPromoModel().getId());
+            goodsVO.setStartTime(goodsModel.getPromoModel().getStartTime().toString(DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")));
+            goodsVO.setPromoPrice(goodsModel.getPromoModel().getPromoGoodsPrice());
+        }else{
+            goodsVO.setPromoStatus(0);
+        }
         return goodsVO;
     }
 }

@@ -2,6 +2,8 @@ package com.xsn.dao;
 
 import com.xsn.dataobject.GoodsDO;
 import com.xsn.dataobject.GoodsDOExample;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface GoodsDOMapper {
@@ -61,4 +63,5 @@ public interface GoodsDOMapper {
      * @mbg.generated Sun Feb 23 13:47:52 CST 2020
      */
     int updateByPrimaryKey(GoodsDO record);
+    void increaseSales(@Param("id")Integer id, @Param("amount") Integer amount);
 }
