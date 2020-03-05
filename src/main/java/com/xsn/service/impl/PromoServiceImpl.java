@@ -5,10 +5,14 @@ import com.xsn.dataobject.PromoDO;
 import com.xsn.service.PromoService;
 import com.xsn.service.model.PromoModel;
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Service
 public class PromoServiceImpl implements PromoService {
@@ -21,16 +25,15 @@ public class PromoServiceImpl implements PromoService {
         if(promoModel==null){
             return null;
         }
+        System.out.println(promoModel.getStartTime()+"------------------------");
         //判断秒杀活动是否开始或者已经开始
-        DateTime now = new DateTime();
-        System.out.println(promoModel.getStartTime().toString(DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")));
-        if(promoModel.getStartTime().isAfterNow()){
+        LocalDateTime now = LocalDateTime.now();
+        if(promoModel.getStartTime().isAfter(now)){
             promoModel.setStatus(1);
-        }else if(promoModel.getEndTime().isBeforeNow()){
+        }else if(promoModel.getEndTime().isBefore(now)){
             promoModel.setStatus(3);
         }else{
             promoModel.setStatus(2);
-
         }
         return promoModel;
     }
@@ -40,8 +43,8 @@ public class PromoServiceImpl implements PromoService {
         }
         PromoModel promoModel = new PromoModel();
         BeanUtils.copyProperties(promoDO,promoModel);
-        promoModel.setStartTime(new DateTime(promoDO.getStartTime()));
-        promoModel.setEndTime(new DateTime(promoDO.getEndTime()));
+        promoModel.setStartTime(promoDO.getStartTime());
+        promoModel.setEndTime(promoDO.getEndTime());
         return promoModel;
     }
 }

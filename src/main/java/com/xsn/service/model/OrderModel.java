@@ -7,14 +7,27 @@ public class OrderModel {
 //    2018291231238y4
     private String orderId;
     private Integer userId;
-    //购买商品单价
+    //若非空 则是以秒杀活动方式下单
+    private Integer promoId;
+    
+    //购买商品单价,若promoId非空 则是秒杀活动价格
     private BigDecimal goodsPrice;
     private Integer goodsId;
     private Integer amount;
+    //购买商品单价,若promoId非空 则是秒杀活动价格
+
     private BigDecimal orderPrice;
 
     public String getOrderId() {
         return orderId;
+    }
+
+    public Integer getPromoId() {
+        return promoId;
+    }
+
+    public void setPromoId(Integer promoId) {
+        this.promoId = promoId;
     }
 
     public void setOrderId(String orderId) {

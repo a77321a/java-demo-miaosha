@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     private SequenceDOMapper sequenceDOMapper;
     @Override
     @Transactional
-    public OrderModel createOrder(Integer userId, Integer goodsId, Integer amount) throws BusinessException {
+    public OrderModel createOrder(Integer userId, Integer goodsId, Integer amount,Integer promoId) throws BusinessException {
         //校验下单状态 商品是否存在，用户是否登录 购买数量是否正确
         GoodsModel goodsModel = goodsService.getGoodsDetail(goodsId);
         if(goodsModel == null){
@@ -47,6 +47,16 @@ public class OrderServiceImpl implements OrderService {
         if(amount <= 0 || amount>99){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"数量信息不正确");
         }
+//        校验活动信息
+        if(promoId==null){
+            //1、校验对应活动是否存在这个商品
+            if(promoId.intValue()!=goodsModel.getPromoModel().getId()){
+                throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"活动信息不正确");
+            }else if(goodsModel.getPromoModel().getStatus().intValue()!=2){
+                //校验活动是否进行中
+                throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"活动未开始");
+            }
+        }
         //落单减库存或者支付减库存
         boolean result =  goodsService.decStock(goodsId,amount);
         if(!result){
@@ -57,8 +67,13 @@ public class OrderServiceImpl implements OrderService {
         orderModel.setUserId(userId);
         orderModel.setGoodsId(goodsId);
         orderModel.setAmount(amount);
-        orderModel.setGoodsPrice(goodsModel.getPrice());
-        orderModel.setOrderPrice(goodsModel.getPrice().multiply(new BigDecimal(amount)));
+        orderModel.setPromoId(promoId);
+        if(promoId!=null){
+            orderModel.setGoodsPrice(goodsModel.getPromoModel().getPromoGoodsPrice());
+        }else{
+            orderModel.setGoodsPrice(goodsModel.getPrice());
+        }
+        orderModel.setOrderPrice(orderModel.getGoodsPrice().multiply(new BigDecimal(amount)));
         orderModel.setOrderId(generateOrderId());
         OrderInfoDO orderInfoDO = convertDOFromModel(orderModel);
 //        生成交易流水

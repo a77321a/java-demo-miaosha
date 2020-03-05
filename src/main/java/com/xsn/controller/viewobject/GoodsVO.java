@@ -1,8 +1,10 @@
 package com.xsn.controller.viewobject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class GoodsVO {
     private Integer id;
@@ -24,7 +26,8 @@ public class GoodsVO {
     //秒杀id
     private Integer promoId;
     //开始时间
-    private String startTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GTM+8")
+    private LocalDateTime startTime;
 
     public Integer getPromoStatus() {
         return promoStatus;
@@ -50,11 +53,11 @@ public class GoodsVO {
         this.promoId = promoId;
     }
 
-    public String getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 

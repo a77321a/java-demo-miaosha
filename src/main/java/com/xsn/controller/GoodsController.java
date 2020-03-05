@@ -9,17 +9,19 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller("goods")
 @RequestMapping("/goods")
 @CrossOrigin(allowCredentials = "true",allowedHeaders = "*")
-public class GoodsController  {
+public class GoodsController extends BaseController  {
     @Autowired
     private GoodsService goodsService;
     @ResponseBody
@@ -68,7 +70,8 @@ public class GoodsController  {
         if(goodsModel.getPromoModel()!=null){
             goodsVO.setPromoStatus(goodsModel.getPromoModel().getStatus());
             goodsVO.setPromoId(goodsModel.getPromoModel().getId());
-            goodsVO.setStartTime(goodsModel.getPromoModel().getStartTime().toString(DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(("yyyy-MM-dd hh:mm:ss"));
+            goodsVO.setStartTime(goodsModel.getPromoModel().getStartTime());
             goodsVO.setPromoPrice(goodsModel.getPromoModel().getPromoGoodsPrice());
         }else{
             goodsVO.setPromoStatus(0);

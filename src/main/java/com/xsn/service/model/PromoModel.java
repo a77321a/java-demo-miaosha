@@ -1,8 +1,8 @@
 package com.xsn.service.model;
 
-import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class PromoModel {
     private Integer id;
@@ -11,9 +11,9 @@ public class PromoModel {
     //秒杀状态 1未开始 2进行中 3已结束
     private Integer status;
     //秒杀开始时间
-    private DateTime startTime;
+    private LocalDateTime startTime;
     //秒杀结束时间
-    private DateTime endTime;
+    private LocalDateTime endTime;
     //秒杀活动适用商品
     private Integer goodsId;
     //秒杀活动的商品价格
@@ -43,12 +43,17 @@ public class PromoModel {
         this.promoName = promoName;
     }
 
-    public DateTime getStartTime() {
+
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(DateTime startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public Integer getGoodsId() {
@@ -67,11 +72,7 @@ public class PromoModel {
         this.promoGoodsPrice = promoGoodsPrice;
     }
 
-    public DateTime getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
-    }
-
-    public void setEndTime(DateTime endTime) {
-        this.endTime = endTime;
     }
 }

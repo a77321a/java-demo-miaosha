@@ -2,40 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53a69452-0215-40cf-a529-035be1f7f465" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/PromoDOMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/PromoDO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/PromoDOExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/PromoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/PromoServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/PromoModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapping/PromoDOMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/controller/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/GoodsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/controller/viewobject/GoodsVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/viewobject/GoodsVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/dao/GoodsDOMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dao/GoodsDOMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/GoodsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/GoodsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/GoodsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/OrderInfoDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/OrderInfoDO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/PromoDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/dataobject/PromoDO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/OrderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/GoodsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/GoodsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/PromoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/PromoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/OrderModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/OrderModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/PromoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/model/PromoModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/GoodsDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapping/GoodsDOMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-generator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/OrderInfoDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapping/OrderInfoDOMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/GoodsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/GoodsController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/OrderController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/viewobject/GoodsVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/viewobject/GoodsVO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/dao/GoodsDOMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/dao/GoodsDOMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/GoodsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/GoodsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/GoodsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/GoodsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/dataobject/OrderInfoDO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/dataobject/OrderInfoDO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/dataobject/PromoDO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/dataobject/PromoDO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/OrderService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/OrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/OrderServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/model/GoodsModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/model/GoodsModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/GoodsDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapping/GoodsDOMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-generator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-generator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/PromoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/PromoServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/model/OrderModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/model/OrderModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/model/PromoModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/model/PromoModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapping/OrderInfoDOMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapping/OrderInfoDOMapper.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -195,7 +186,10 @@
       <workItem from="1583041923105" duration="805000" />
       <workItem from="1583043817526" duration="748000" />
       <workItem from="1583069173993" duration="2656000" />
-      <workItem from="1583117455163" duration="12647000" />
+      <workItem from="1583117455163" duration="12958000" />
+      <workItem from="1583152077938" duration="7273000" />
+      <workItem from="1583312109013" duration="2742000" />
+      <workItem from="1583388024608" duration="976000" />
     </task>
     <servers />
   </component>
@@ -222,19 +216,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xsn/controller/OrderController.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xsn/service/impl/OrderServiceImpl.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/xsn/service/impl/GoodsServiceImpl.java</url>
           <line>45</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/xsn/service/impl/OrderServiceImpl.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/xsn/controller/OrderController.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

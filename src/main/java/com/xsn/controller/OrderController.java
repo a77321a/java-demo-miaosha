@@ -27,13 +27,14 @@ public class OrderController extends BaseController  {
                                         ) throws BusinessException {
         Integer goodsId = Integer.valueOf(req.get("goodsId")) ;
         Integer amount = Integer.valueOf(req.get("amount"));
+        Integer promoId = Integer.valueOf(req.get("promoId"));
+
         Boolean isLogin =   (Boolean)session.getAttribute("IS_LOGIN");
-//        Boolean isLogin = (Boolean) httpServletRequest.getSession().getAttribute("IS_LOGIN");
         if(isLogin == null || !isLogin.booleanValue()){
             throw new BusinessException(EmBusinessError.USER_NOT_EXIT,"请登录后下单");
         }
         UserModel userModel = (UserModel) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-        OrderModel orderModel =  orderService.createOrder(userModel.getId(),goodsId,amount);
+        OrderModel orderModel =  orderService.createOrder(userModel.getId(),goodsId,amount,promoId);
         return CommonReturnType.create(orderModel);
     }
 }
