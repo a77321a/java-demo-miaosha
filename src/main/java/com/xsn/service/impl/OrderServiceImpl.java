@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"数量信息不正确");
         }
 //        校验活动信息
-        if(promoId==null){
+        if(promoId!=null){
             //1、校验对应活动是否存在这个商品
             if(promoId.intValue()!=goodsModel.getPromoModel().getId()){
                 throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"活动信息不正确");

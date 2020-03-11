@@ -27,8 +27,8 @@ public class OrderController extends BaseController  {
                                         ) throws BusinessException {
         Integer goodsId = Integer.valueOf(req.get("goodsId")) ;
         Integer amount = Integer.valueOf(req.get("amount"));
-        Integer promoId = Integer.valueOf(req.get("promoId"));
-
+//        Integer promoId = Integer.valueOf(req.get("promoId")) ?;
+        Integer promoId = Boolean.parseBoolean(req.get("promoId")) ?  Integer.valueOf(req.get("promoId")) :null;
         Boolean isLogin =   (Boolean)session.getAttribute("IS_LOGIN");
         if(isLogin == null || !isLogin.booleanValue()){
             throw new BusinessException(EmBusinessError.USER_NOT_EXIT,"请登录后下单");
