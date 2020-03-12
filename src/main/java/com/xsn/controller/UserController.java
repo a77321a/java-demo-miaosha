@@ -44,8 +44,6 @@ public class UserController extends BaseController {
         HttpSession session = httpServletRequest.getSession();
         session.setAttribute("IS_LOGIN",true);
         session.setAttribute("LOGIN_USER",userModel);
-//        httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
-//        httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
         UserVO userVO = convertFromModel(userModel);
         return CommonReturnType.create(userVO);
     }

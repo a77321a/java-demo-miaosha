@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Controller("goods")
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
 public class GoodsController extends BaseController  {
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private RedisTemplate redisTemplate;
     @ResponseBody
     @RequestMapping(value = "/createGoods",method = {RequestMethod.POST})
     public CommonReturnType createGoods(@RequestParam(name = "title")String title,
@@ -45,7 +49,15 @@ public class GoodsController extends BaseController  {
     @ResponseBody
     @GetMapping("/get")
     public CommonReturnType getGoods(@RequestParam(name = "id")Integer id){
-        GoodsModel goodsModel = goodsService.getGoodsDetail(id);
+//        根据商品id到redis内获取
+        GoodsModel goodsModel = (GoodsModel) redisTemplate.opsForValue().get("goods_"+id);
+        //若redis不存在相应goodsModel，往下走service操作 谁知
+        if(goodsModel == null){
+            goodsModel = goodsService.getGoodsDetail(id);
+            redisTemplate.opsForValue().set("goods_"+id,goodsModel);
+            redisTemplate.expire("goods_"+id,10, TimeUnit.MINUTES);
+        }
+//        GoodsModel goodsModel = goodsService.getGoodsDetail(id);
         GoodsVO goodsVO = convertVOFromModel(goodsModel);
         return CommonReturnType.create(goodsVO);
     }
