@@ -4,9 +4,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class GoodsModel {
+public class GoodsModel implements Serializable {
     private Integer id;
     //商品名
     @NotBlank(message = "商品名不能为空")

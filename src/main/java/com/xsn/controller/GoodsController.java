@@ -1,5 +1,7 @@
 package com.xsn.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.xsn.controller.viewobject.GoodsVO;
 import com.xsn.error.BusinessException;
 import com.xsn.response.CommonReturnType;
@@ -28,6 +30,7 @@ public class GoodsController extends BaseController  {
     private GoodsService goodsService;
     @Autowired
     private RedisTemplate redisTemplate;
+
     @ResponseBody
     @RequestMapping(value = "/createGoods",method = {RequestMethod.POST})
     public CommonReturnType createGoods(@RequestParam(name = "title")String title,
@@ -50,8 +53,12 @@ public class GoodsController extends BaseController  {
     @GetMapping("/get")
     public CommonReturnType getGoods(@RequestParam(name = "id")Integer id){
 //        根据商品id到redis内获取
+//        GoodsModel goodsModel = new GoodsModel();
+//        Gson gson = new Gson();
+//        GoodsModel goodsModel = gson.fromJson((JsonElement) redisTemplate.opsForValue().get("goods_"+id),GoodsModel.class);
+//        GoodsModel goodsModel = (GoodsModel) redisTemplate.opsForValue().get("goods_"+id);
         GoodsModel goodsModel = (GoodsModel) redisTemplate.opsForValue().get("goods_"+id);
-        //若redis不存在相应goodsModel，往下走service操作 谁知
+        //若redis不存在相应goodsModel，往下走service操作 
         if(goodsModel == null){
             goodsModel = goodsService.getGoodsDetail(id);
             redisTemplate.opsForValue().set("goods_"+id,goodsModel);
@@ -82,7 +89,7 @@ public class GoodsController extends BaseController  {
         if(goodsModel.getPromoModel()!=null){
             goodsVO.setPromoStatus(goodsModel.getPromoModel().getStatus());
             goodsVO.setPromoId(goodsModel.getPromoModel().getId());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(("yyyy-MM-dd hh:mm:ss"));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(("yyyy-MM-dd HH:mm:ss"));
             goodsVO.setStartTime(goodsModel.getPromoModel().getStartTime());
             goodsVO.setPromoPrice(goodsModel.getPromoModel().getPromoGoodsPrice());
         }else{

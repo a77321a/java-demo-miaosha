@@ -10,6 +10,8 @@ import com.xsn.service.model.UserModel;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +22,17 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
 @Controller("user")
 @RequestMapping("/user")
 @CrossOrigin(allowCredentials = "true", allowedHeaders = "*")
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Autowired
 //    httpServletRequest是一个单例模式
 //    本质是一个proxy 内部threadlocal方式 处理线程对应的request
@@ -41,11 +48,15 @@ public class UserController extends BaseController {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         UserModel userModel = userService.login(mobile,password);
-        HttpSession session = httpServletRequest.getSession();
-        session.setAttribute("IS_LOGIN",true);
-        session.setAttribute("LOGIN_USER",userModel);
+//        HttpSession session = httpServletRequest.getSession();
+//        session.setAttribute("IS_LOGIN",true);
+//        session.setAttribute("LOGIN_USER",userModel);
+        String uuidToken = UUID.randomUUID().toString();
+        uuidToken = uuidToken.replace("-","");
+        redisTemplate.opsForValue().set(uuidToken,userModel);
+        redisTemplate.expire(uuidToken,1, TimeUnit.HOURS);
         UserVO userVO = convertFromModel(userModel);
-        return CommonReturnType.create(userVO);
+        return CommonReturnType.create(uuidToken);
     }
 
 

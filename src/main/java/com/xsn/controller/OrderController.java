@@ -8,6 +8,7 @@ import com.xsn.service.OrderService;
 import com.xsn.service.model.OrderModel;
 import com.xsn.service.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
@@ -21,19 +22,22 @@ public class OrderController extends BaseController  {
     private OrderService orderService;
     @Autowired
     private HttpServletRequest httpServletRequest;
+    @Autowired
+    private RedisTemplate redisTemplate;
     @ResponseBody
     @RequestMapping(value = "/createOrder",method = {RequestMethod.POST})
-    public CommonReturnType createOrder(@RequestBody Map<String,String> req, HttpSession session
+    public CommonReturnType createOrder(@RequestBody Map<String,String> req,HttpServletRequest hsp
                                         ) throws BusinessException {
         Integer goodsId = Integer.valueOf(req.get("goodsId")) ;
         Integer amount = Integer.valueOf(req.get("amount"));
-//        Integer promoId = Integer.valueOf(req.get("promoId")) ?;
+//        Map map=hsp.getParameterMap();
+        String token = hsp.getHeader("Authorization").toString();
         Integer promoId = Boolean.parseBoolean(req.get("promoId")) ?  Integer.valueOf(req.get("promoId")) :null;
-        Boolean isLogin =   (Boolean)session.getAttribute("IS_LOGIN");
-        if(isLogin == null || !isLogin.booleanValue()){
+        UserModel userModel = (UserModel) redisTemplate.opsForValue().get(token);
+        if(userModel == null){
             throw new BusinessException(EmBusinessError.USER_NOT_EXIT,"请登录后下单");
         }
-        UserModel userModel = (UserModel) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+//        UserModel userModel = (UserModel) httpServletRequest.getSession().getAttribute("LOGIN_USER");
         OrderModel orderModel =  orderService.createOrder(userModel.getId(),goodsId,amount,promoId);
         return CommonReturnType.create(orderModel);
     }
