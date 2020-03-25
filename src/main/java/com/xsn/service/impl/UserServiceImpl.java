@@ -14,10 +14,13 @@ import com.xsn.validator.ValidatorImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,6 +30,8 @@ public class UserServiceImpl implements UserService {
     private UserPasswordDOMapper userPasswordDOMapper;
     @Autowired
     private ValidatorImpl validatorImpl;
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Override
     public UserModel getUserById(Integer id){
 //        使用userMapper 获取用户dataobject
@@ -37,6 +42,18 @@ public class UserServiceImpl implements UserService {
        UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
        return convertFromDataObject(userDO,userPasswordDO);
     }
+
+    @Override
+    public UserModel getUserByIdInCache(Integer id) {
+        UserModel userModel = (UserModel) redisTemplate.opsForValue().get("user_validate_"+id);
+        if(userModel==null) {
+            userModel = this.getUserById(id);
+            redisTemplate.opsForValue().set("user_validate_"+id,userModel);
+            redisTemplate.expire("user_validate_"+id,10, TimeUnit.MINUTES);
+        }
+        return userModel;
+    }
+
     private UserModel convertFromDataObject(UserDO userDO, UserPasswordDO userPasswordDO){
         if(userDO==null){
             return null;

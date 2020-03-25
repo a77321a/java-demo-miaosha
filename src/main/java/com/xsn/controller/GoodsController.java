@@ -5,7 +5,9 @@ import com.google.gson.JsonElement;
 import com.xsn.controller.viewobject.GoodsVO;
 import com.xsn.error.BusinessException;
 import com.xsn.response.CommonReturnType;
+import com.xsn.service.CacheService;
 import com.xsn.service.GoodsService;
+import com.xsn.service.PromoService;
 import com.xsn.service.model.GoodsModel;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -28,9 +30,17 @@ import java.util.stream.Collectors;
 public class GoodsController extends BaseController  {
     @Autowired
     private GoodsService goodsService;
+    
     @Autowired
     private RedisTemplate redisTemplate;
-
+    
+    @Autowired
+    private CacheService cacheService;
+    
+    @Autowired
+    private PromoService promoService;
+    
+    //创建商品
     @ResponseBody
     @RequestMapping(value = "/createGoods",method = {RequestMethod.POST})
     public CommonReturnType createGoods(@RequestParam(name = "title")String title,
@@ -48,28 +58,33 @@ public class GoodsController extends BaseController  {
         GoodsVO goodsVO = convertVOFromModel(goodsModelReturn);
         return CommonReturnType.create(goodsVO);
     }
+    
     //商品详情浏览
     @ResponseBody
     @GetMapping("/get")
     public CommonReturnType getGoods(@RequestParam(name = "id")Integer id){
-//        根据商品id到redis内获取
-//        GoodsModel goodsModel = new GoodsModel();
-//        Gson gson = new Gson();
-//        GoodsModel goodsModel = gson.fromJson((JsonElement) redisTemplate.opsForValue().get("goods_"+id),GoodsModel.class);
-//        GoodsModel goodsModel = (GoodsModel) redisTemplate.opsForValue().get("goods_"+id);
-        GoodsModel goodsModel = (GoodsModel) redisTemplate.opsForValue().get("goods_"+id);
-        //若redis不存在相应goodsModel，往下走service操作 
-        if(goodsModel == null){
-            goodsModel = goodsService.getGoodsDetail(id);
-            redisTemplate.opsForValue().set("goods_"+id,goodsModel);
-            redisTemplate.expire("goods_"+id,10, TimeUnit.MINUTES);
+        GoodsModel goodsModel = null;
+        //多级缓存 先从本地缓存取，本地没有去redis取
+        goodsModel = (GoodsModel) cacheService.getFromCommonCache("goods_"+id);
+        if(goodsModel==null){
+            //根据商品id到redis内获取
+            goodsModel = (GoodsModel) redisTemplate.opsForValue().get("goods_"+id);
+            if(goodsModel == null){
+                //若redis不存在相应goodsModel，往下走service操作 
+                goodsModel = goodsService.getGoodsDetail(id);
+                redisTemplate.opsForValue().set("goods_"+id,goodsModel);
+                redisTemplate.expire("goods_"+id,10, TimeUnit.MINUTES);
+            }
+            //填充本地缓存
+            cacheService.setCommonCache("goods_"+id,goodsModel);
         }
-//        GoodsModel goodsModel = goodsService.getGoodsDetail(id);
+//        System.out.println(cacheService.getFromCommonCache("goods_"+id).toString());
         GoodsVO goodsVO = convertVOFromModel(goodsModel);
         return CommonReturnType.create(goodsVO);
     }
+    
+    
     //商品列表浏览
-    //商品详情浏览
     @ResponseBody
     @RequestMapping(value = "/list")
     public CommonReturnType getGoodsList(){
@@ -81,7 +96,16 @@ public class GoodsController extends BaseController  {
         return CommonReturnType.create(goodsVOList);
     }
 
-
+    //发布活动
+    @RequestMapping(value = "/publishpromo",method = {RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType publishPromo(@RequestParam(name = "id")Integer id){
+        promoService.publishPromo(id);
+        return CommonReturnType.create(null);
+    }
+    
+    
+    //viewobject转换
     private GoodsVO convertVOFromModel(GoodsModel goodsModel){
         if(null == goodsModel) return null;
         GoodsVO goodsVO = new GoodsVO();

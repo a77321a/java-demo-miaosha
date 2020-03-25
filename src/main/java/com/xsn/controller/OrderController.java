@@ -30,14 +30,14 @@ public class OrderController extends BaseController  {
                                         ) throws BusinessException {
         Integer goodsId = Integer.valueOf(req.get("goodsId")) ;
         Integer amount = Integer.valueOf(req.get("amount"));
-//        Map map=hsp.getParameterMap();
-        String token = hsp.getHeader("Authorization").toString();
-        Integer promoId = Boolean.parseBoolean(req.get("promoId")) ?  Integer.valueOf(req.get("promoId")) :null;
+        String token = hsp.getHeader("Authorization").toString().equals("undefined")
+                ?req.get("token").toString()
+                : hsp.getHeader("Authorization").toString() ;
+        Integer promoId = req.get("promoId") != null ?  Integer.valueOf(req.get("promoId")) :null;
         UserModel userModel = (UserModel) redisTemplate.opsForValue().get(token);
         if(userModel == null){
             throw new BusinessException(EmBusinessError.USER_NOT_EXIT,"请登录后下单");
         }
-//        UserModel userModel = (UserModel) httpServletRequest.getSession().getAttribute("LOGIN_USER");
         OrderModel orderModel =  orderService.createOrder(userModel.getId(),goodsId,amount,promoId);
         return CommonReturnType.create(orderModel);
     }

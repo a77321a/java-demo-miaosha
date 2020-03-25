@@ -6,22 +6,36 @@ import com.xsn.dataobject.GoodsDO;
 import com.xsn.dataobject.GoodsStockDO;
 import com.xsn.error.BusinessException;
 import com.xsn.error.EmBusinessError;
+import com.xsn.mq.MqProducer;
 import com.xsn.service.GoodsService;
 import com.xsn.service.PromoService;
 import com.xsn.service.model.GoodsModel;
 import com.xsn.service.model.PromoModel;
 import com.xsn.validator.ValidResult;
 import com.xsn.validator.ValidatorImpl;
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
+    @Autowired
+    private MqProducer mqProducer;
+    
+    
+    
+    
     @Autowired
     private ValidatorImpl validatorImpl;
     @Autowired
@@ -30,11 +44,27 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsStockDOMapper goodsStockDOMapper;
     @Autowired
     private PromoService promoService;
+    
+    @Autowired
+    private RedisTemplate redisTemplate;
+    
     @Override
     @Transactional
     public boolean decStock(Integer goodsId,Integer amount) {
-        int affectedRow = goodsStockDOMapper.desStorck(goodsId,amount);
-        if(affectedRow>0){
+        //从redis中扣减库存，生产环境要保证redis性能 
+        long result = redisTemplate.opsForValue().increment("promo_goods_stock"+goodsId,amount.intValue()*-1);
+        if(result>=0){
+            try {
+                SendResult sendResult = mqProducer.asyncReduceStock(goodsId,amount);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (RemotingException e) {
+                e.printStackTrace();
+            } catch (MQClientException e) {
+                e.printStackTrace();
+            } catch (MQBrokerException e) {
+                e.printStackTrace();
+            }
             return true;
         }
         return  false;
@@ -44,6 +74,17 @@ public class GoodsServiceImpl implements GoodsService {
     @Transactional
     public void increaseSales(Integer goodsId, Integer amount) {
         goodsDOMapper.increaseSales(goodsId,amount);
+    }
+
+    @Override
+    public GoodsModel getGoodsByIdInCache(Integer goodsId) {
+       GoodsModel goodsModel = (GoodsModel) redisTemplate.opsForValue().get("goods_validate_"+goodsId);
+       if(goodsModel==null) {
+           goodsModel = this.getGoodsDetail(goodsId);
+           redisTemplate.opsForValue().set("goods_validate_"+goodsId,goodsModel);
+           redisTemplate.expire("goods_validate_"+goodsId,10, TimeUnit.MINUTES);
+       }
+        return goodsModel;
     }
 
     @Override

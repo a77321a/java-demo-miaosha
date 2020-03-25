@@ -2,12 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53a69452-0215-40cf-a529-035be1f7f465" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/note/云端部署.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/mq/MqConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xsn/mq/MqProducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/controller/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/controller/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/GoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/GoodsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/PromoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/PromoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/CacheServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/CacheServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/GoodsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/GoodsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/PromoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/PromoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xsn/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/miaosha1.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/BaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/BaseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/GoodsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/GoodsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/controller/viewobject/GoodsVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/controller/viewobject/GoodsVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/GoodsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/GoodsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/PromoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/PromoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/GoodsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/GoodsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/OrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/OrderServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/PromoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/PromoServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/model/GoodsModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/model/GoodsModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/model/PromoModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/model/PromoModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xsn/service/model/UserModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xsn/service/model/UserModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/miaosha-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.xsn.AppTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.xsn.AppTest.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +54,7 @@
       <list>
         <option value="spring-beans.schema" />
         <option value="Enum" />
+        <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -52,15 +87,25 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/xsn/service" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/com/xsn/service" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/mapping" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.xsn.serializer" />
+      <recent name="com.xsn.config" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.xsn" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/xsn/service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -127,10 +172,18 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="miaosha1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xsn.App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.App" />
       <item itemvalue="Application.OrderServiceImpl" />
       <item itemvalue="Maven.mybatis-generator" />
+      <item itemvalue="Spring Boot.App" />
     </list>
     <recent_temporary>
       <list>
@@ -170,7 +223,15 @@
       <workItem from="1583117455163" duration="12958000" />
       <workItem from="1583152077938" duration="7273000" />
       <workItem from="1583312109013" duration="2742000" />
-      <workItem from="1583388024608" duration="3999000" />
+      <workItem from="1583388024608" duration="7373000" />
+      <workItem from="1583803044437" duration="2364000" />
+      <workItem from="1583910835905" duration="2234000" />
+      <workItem from="1583983885157" duration="11947000" />
+      <workItem from="1584081167589" duration="4160000" />
+      <workItem from="1584151443116" duration="7294000" />
+      <workItem from="1584688220629" duration="2418000" />
+      <workItem from="1584926532383" duration="1767000" />
+      <workItem from="1585040861147" duration="1170000" />
     </task>
     <servers />
   </component>
@@ -192,16 +253,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xsn/service/impl/GoodsServiceImpl.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

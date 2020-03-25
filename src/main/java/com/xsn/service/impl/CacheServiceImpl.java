@@ -19,7 +19,7 @@ public class CacheServiceImpl implements CacheService {
                 .initialCapacity(10)
                 //设置缓存中最大可以存储100个Key，超过100个之后会按照LRU策略移除缓存项
                 .maximumSize(100)
-                //设置写缓存后多少秒国企
+                //设置写缓存后多少秒过期
                 .expireAfterWrite(60,TimeUnit.SECONDS).build();
     }
     @Override

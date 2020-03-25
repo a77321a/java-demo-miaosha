@@ -15,4 +15,7 @@ public interface GoodsService {
     boolean decStock(Integer goodsId, Integer amount) throws BusinessException;
     //商品销量增加
     void increaseSales(Integer goodsId, Integer amount);
+    //验证商品及活动是否有效
+    GoodsModel getGoodsByIdInCache(Integer goodsId);
+    
 }

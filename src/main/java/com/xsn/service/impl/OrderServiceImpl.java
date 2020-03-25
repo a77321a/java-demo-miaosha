@@ -35,19 +35,23 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderModel createOrder(Integer userId, Integer goodsId, Integer amount,Integer promoId) throws BusinessException {
-        //校验下单状态 商品是否存在，用户是否登录 购买数量是否正确
-        GoodsModel goodsModel = goodsService.getGoodsDetail(goodsId);
+        //校验下单状态 商品是否存在， 
+        //GoodsModel goodsModel = goodsService.getGoodsDetail(goodsId);
+        GoodsModel goodsModel = goodsService.getGoodsByIdInCache(goodsId);
         if(goodsModel == null){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"商品不存在");
         }
-        UserModel userModel = userService.getUserById(userId);
+        //用户是否登录
+        // UserModel userModel = userService.getUserById(userId);
+        UserModel userModel = userService.getUserByIdInCache(userId);
         if(userModel==null){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"用户信息不存在");
         }
+        //购买数量是否正确
         if(amount <= 0 || amount>99){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"数量信息不正确");
         }
-//        校验活动信息
+        //校验活动信息
         if(promoId!=null){
             //1、校验对应活动是否存在这个商品
             if(promoId.intValue()!=goodsModel.getPromoModel().getId()){
