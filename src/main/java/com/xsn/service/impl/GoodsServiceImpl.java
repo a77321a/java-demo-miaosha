@@ -50,22 +50,26 @@ public class GoodsServiceImpl implements GoodsService {
     
     @Override
     @Transactional
-    public boolean decStock(Integer goodsId,Integer amount) {
+    public boolean decStock(Integer goodsId,Integer amount)  {
         //从redis中扣减库存，生产环境要保证redis性能 
         long result = redisTemplate.opsForValue().increment("promo_goods_stock"+goodsId,amount.intValue()*-1);
         if(result>=0){
             try {
-                SendResult sendResult = mqProducer.asyncReduceStock(goodsId,amount);
+                boolean sendResult = mqProducer.asyncReduceStock(goodsId,amount);
+                return sendResult;
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                return false;
             } catch (RemotingException e) {
                 e.printStackTrace();
+                return false;
             } catch (MQClientException e) {
                 e.printStackTrace();
+                return false;
             } catch (MQBrokerException e) {
                 e.printStackTrace();
+                return false;
             }
-            return true;
         }
         return  false;
     }

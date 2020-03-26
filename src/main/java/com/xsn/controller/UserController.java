@@ -43,7 +43,6 @@ public class UserController extends BaseController {
     public CommonReturnType login(@RequestBody Map<String,String> req) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
         String mobile = req.get("mobile");
         String password = req.get("password");
-        System.out.println(httpServletRequest.getQueryString());
         if(StringUtils.isEmpty(mobile)||StringUtils.isEmpty(password)){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
