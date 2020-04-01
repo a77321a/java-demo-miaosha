@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Component
 public class MqConsumer {
-    
+//    绑定consumer
     private DefaultMQPushConsumer consumer;
     @Value("${mq.nameserver.addr}")
     private String nameAddr;
